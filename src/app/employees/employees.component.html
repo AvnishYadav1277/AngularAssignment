@@ -1,0 +1,37 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">All Employees with thier roles</h4>
+                        <p class="category">Here is a list of all employees</p>
+                        <button type="submit" class="btn btn-primary pull-right" (click)="CreateEmployee()">Create
+                            Employee</button>
+
+                    </div>
+
+                    <div class="content table-responsive table-full-width">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let row of tableData1.dataRows" (click)="onRowClick(row)"
+                                    class="clickable-row">
+                                    <td
+                                        *ngFor="let cell of [row.firstName, row.lastName, row.emailAddress, row.roleName]">
+                                        {{cell}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

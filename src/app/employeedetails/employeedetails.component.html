@@ -1,0 +1,57 @@
+<div class="container">
+    <h2>Employee Form</h2>
+
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+            <label>First Name:</label>
+            <input type="text" class="form-control" formControlName="firstName">
+            <small *ngIf="employeeForm.get('firstName')?.invalid && employeeForm.get('firstName')?.touched"
+                class="text-danger">
+                First name is required (min 2 characters)
+            </small>
+        </div>
+
+        <div class="form-group">
+            <label>Last Name:</label>
+            <input type="text" class="form-control" formControlName="lastName">
+            <small *ngIf="employeeForm.get('lastName')?.invalid  && employeeForm.get('lastName')?.touched"
+                class="text-danger">
+                Last name is required
+            </small>
+        </div>
+
+        <div class="form-group">
+            <label>Email Address:</label>
+            <input type="email" class="form-control" formControlName="emailAddress">
+            <small *ngIf="employeeForm.get('emailAddress')?.invalid  && employeeForm.get('emailAddress')?.touched"
+                class="text-danger">
+                Enter a valid email
+            </small>
+        </div>
+
+        <div class="form-group">
+            <label>Role:</label>
+            <select class="form-control" formControlName="roleId">
+                <option value="">Select Role</option>
+                <option value="1">Admin</option>
+                <option value="2">Manager</option>
+                <option value="3">Auditor</option>
+                <option value="4">Auditee</option>
+            </select>
+            <small *ngIf="employeeForm.get('roleId')?.invalid && employeeForm.get('roleId')?.touched"
+                class="text-danger">
+                Please select a role
+            </small>
+        </div>
+
+        <input type="hidden" formControlName="userId">
+
+        <div class="d-flex" style="gap: 10px;">
+            <button *ngIf="userId !== 0" type="button" class="btn btn-danger" (click)="onDelete()">Delete</button>
+            <button type="submit" class="btn btn-primary" [disabled]="employeeForm.invalid">Submit</button>
+        </div>
+
+
+    </form>
+</div>
