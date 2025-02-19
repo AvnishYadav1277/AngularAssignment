@@ -49,10 +49,27 @@ export class EmployeedetailsComponent implements OnInit {
     if (this.employeeForm.valid) {
       const employeeData = this.employeeForm.value;
 
+
+      this.userId = Number(this.route.snapshot.paramMap.get('userId'));
+      let apiCall = '';
+      if (this.userId === 0) {
+        apiCall = 'http://localhost:5108/Users/CreateUser';
+      } else {
+        apiCall = 'http://localhost:5108/Users/EditUser';
+      }
+
       // Define headers (if needed)
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-      this.httpClient.post('http://localhost:5108/Users/EditUser', employeeData, { headers }).subscribe({
+      let requestData = {
+        "firstName": employeeData.firstName,
+        "lastName": employeeData.lastName,
+        "emailAddress": employeeData.emailAddress,
+        "roleId": parseInt(employeeData.roleId, 10)
+      }
+      console.log('Employee Data: ', requestData);
+
+      this.httpClient.post(apiCall, requestData, { headers }).subscribe({
         next: (response) => {
           console.log('Response:', response);
           alert('Employee added successfully!');
